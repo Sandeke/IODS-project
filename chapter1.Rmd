@@ -1,4 +1,4 @@
 
 # About the project
 
-*Write a short description about the course and add a link to your github repository here. This is an R markdown (.Rmd) file so you can use R markdown syntax. See the 'Useful links' page in the mooc area (chapter 1) for instructions.*
+The IODS course would give me the possibility to learn more about data science and R. **Datacamp** offered a fun way to learn more about R. On the other hand I had some trouble getting github to function as I didn't understand how to open it from the files on my computer. But I'm starting to enjoy it.
