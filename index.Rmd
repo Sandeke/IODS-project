@@ -1,8 +1,8 @@
 ---
 title: "IODS course project"
 author: "Kevin Sandeman"
-  output:
-  html_document:
+output:
+html_document:
     theme: cosmo
     toc: true
     toc_depth: 2

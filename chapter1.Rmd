@@ -1,4 +1,4 @@
 
 # About the project
 
-The IODS course would give me the possibility to learn more about data science and R. **Datacamp** offered a fun way to learn more about R. On the other hand I had some trouble getting github to function as I didn't understand how to open it from the files on my computer. But I'm starting to enjoy it.
+The IODS course will give me the possibility to learn more about data science and R. **Datacamp** offered a fun way to learn more about R. On the other hand I had some trouble getting github to function as I didn't understand how to open it from the files on my computer. But I'm starting to enjoy it.

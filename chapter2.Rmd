@@ -1,7 +1,7 @@
-# Insert chapter 2 title here
+# Descripion of the course
 
-*Describe the work you have done this week and summarize your learning.*
+*What I have learned untill now about the course.*
 
-- Describe your work and results clearly. 
-- Assume the reader has an introductory course level understanding of writing and reading R code as well as statistical methods
-- Assume the reader has no previous knowledge of your data or the more advanced methods you are using  
+- This week I started to learn the basics of doing analysis in **R** with the **RStudio** with the help of the course **"R Short and sweet"** on the Datacamp site.
+- Reading the codes in RStudio helps to learn about the broad possibilities like the **Chunk options**, that make it possible to integrate different parts of material into one document
+- The Github forum offers a new way of working with changes in files, that demands some patience and time.
