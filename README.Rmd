@@ -1,0 +1,14 @@
+---
+title: "README"
+author: "Kevin Sandeman"
+date: "4 november 2017"
+output:
+  html_document:
+    theme: yeti
+   
+---
+
+## Something about the course
+
+I'm starting to appreciate and see the potential of combining RStudio and Github to handle my scientific projects. The **R Markdown cheat sheet** is really useful.
+
