@@ -9,9 +9,9 @@ output: html_document
 
 *This week datawrangling, logistic regression, odds ratio and prediction have been central in this course.*
 
-### 1. Create this file
+##Create this file
 
-### 2. Read the joined student alcohol consumption data
+##Read the joined student alcohol consumption data
 
 ```{r}
 data_url <- "http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/alc.txt"
@@ -59,11 +59,11 @@ The following grades are related with the course subject, Math or Portuguese:
 34. **alc_use:**  average of 'Dalc' and 'Walc'
 35. **high_use:** TRUE if 'alc_use' is higher than 2 and FALSE otherwise  
 
-### 3. Four interesting variables in the data and for each of them, present your personal hypothesis
+##Four interesting variables in the data and for each of them, present your personal hypothesis
 
 I would chose sex, quality of family relationship, going out with friends and the willingness to take higher education as variables for further investigastion. I would believe that male students, that go out a lot would use more alcohol. Willingness to take higher education and a good family relationship could be intuitively associated with low alcohol consumption.
 
-### 4.Numerical and graphical exploration of the distributions of the variables above and their relationships with alcohol consumption (use for example cross-tabulations, bar plots and box plots)
+##Numerical and graphical exploration of the distributions of the variables above and their relationships with alcohol consumption (use for example cross-tabulations, bar plots and box plots)
 
 ```{r}
 library(tidyr); library(dplyr); library(ggplot2)
@@ -100,7 +100,7 @@ table(alc$higher, alc$high_use) %>% prop.table %>% addmargins()*100
 
 In the crosstabulation above between the willingness to pursue higher education ("no", "yes") and high use of alcohol ("FALSE", "TRUE") the numbers are expressed as percentage of the whole studymaterial. Students having a high alcohol use seem not to pursue higher education in the same proportion as the students that drink less.  
 
-### 5. Explore the relationship between your chosen variables and the binary high/low alcohol consumption variable as the target variable
+##Explore the relationship between your chosen variables and the binary high/low alcohol consumption variable as the target variable
 
 ```{r}
 library(tidyr)
@@ -147,7 +147,7 @@ loss_func(class = alc$high_use, prob = alc$probability)
 
 The prediction of the logistic regression model deviates 20 % of the actual values.
 
-### 7. Bonus 10-fold cross-validation  
+##Bonus 10-fold cross-validation  
 ```{r}
 library(boot)
 m <- glm(high_use ~ famrel + goout + higher + sex, data = alc, family = "binomial")

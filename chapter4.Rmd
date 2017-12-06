@@ -8,7 +8,7 @@ output: html_document
 
 *This week clustering and classification are central in this course.*
 
-### 1-2. Create this file and describe the data
+##Create this file and describe the data
 ```{r}
 library(MASS)
 data("Boston")
@@ -31,7 +31,7 @@ str(Boston)
 13. **lstat:** lower status of the population (percent).  
 14. **medv:** median value of owner-occupied homes in \$1000s.  
 
-### 3. Grafical overview and summary
+##Grafical overview and summary
 
 ```{r}
 pairs(Boston)
@@ -55,7 +55,7 @@ corrplot(cor_matrix, method="circle", type = "upper", cl.pos= "b", tl.pos = "d",
 
 There seem to be negative correlations between dis versus age, nox, indus and tax, suggesting that the further from the employment centers the buildings are younger, there is less nitrous oxide pollution ,the proportion of non-retail businesses is lower and the full-value property-tax rate is higher. The correlation between medv and lstat is outspoken negative, meaning that areas with lower social status of the population have cheaper owner-occupied houses and vice versa.  
 
-### 4. Standarized data set and division into training and test set
+##Standarized data set and division into training and test set
 
 ```{r}
 boston_scaled <- scale(Boston)
@@ -85,7 +85,7 @@ train <- boston_scaled[ind,]
 test <- boston_scaled[-ind,]
 ```
 
-### 5. Linear discriminant analysis
+##Linear discriminant analysis
 
 ```{r}
 # linear discriminant analysis
@@ -111,7 +111,7 @@ lda.arrows(lda.fit, myscale = 2)
   
 In this example the LD1-model explains 95 % of the clustering with the index of accessibility to radial highways (rad) as the most influential linear separator.
 
-### 6. Predict LDA model on test data
+##Predict LDA model on test data
 
 ```{r}
 # save the correct classes from test data
@@ -127,7 +127,7 @@ table(correct = correct_classes, predicted = lda.pred$class)
 
 The model predicts well the true values for the categorical crime rate. Most of the wrong predictions were adressed to the med_low crime group.
 
-### 7. k-means algoritm
+##k-means algoritm
 
 ```{r}
 #reload Boston and scale
@@ -160,7 +160,7 @@ pairs(boston_scaled, col = km$cluster)
 
 The optimal number for clusters, according to k-means algorithm is 2. In the correlation plot above, we can see that the plots with strong correlations between the parameters, show for most of the variables a division into two clusters, according to k-means method.
 
-### K-means with 4 clusters and LDA
+##K-means with 4 clusters and LDA
 
 ```{r}
 km <-kmeans(dist_scaled, centers = 4)
@@ -176,7 +176,7 @@ lda.arrows(lda.fit, myscale = 3)
 
 In this example the LD1-model explains only 76 % of the clustering with rad, nox, indus and zn as the most influential linear separators. K-mean algorithm with 4 centers isn't a better model to cluster this data.
 
-### Plotly
+##Plotly
 
 ```{r}
 model_predictors <- dplyr::select(train, -crime)

@@ -1,0 +1,147 @@
+---
+title: "Chapter5.Rmd"
+author: "Kevin Sandeman"
+date: "2 december 2017"
+output: html_document
+---
+
+# RStudio Exercise 5
+
+*This week dimensionality reduction techniques are central in this course.*
+
+##Data exploration
+
+```{r}
+# To be sure that I work with the correct data I started from the new link.
+human <- read.table("http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/human2.txt", sep =",", header = TRUE)
+dim(human)
+str(human)
+```
+
+In the "human"-data file there are 155 countries with the following 8 variables:
+ 
+**GNI** : Gross National Income per capita  
+**Life.Exp** : Life expectancy at birth  
+**Edu.Exp** : Expected years of schooling   
+**Mat.Mor** : Maternal mortality ratio  
+**Ado.Birth** : Adolescent birth rate  
+**Parli.F** : Percetange of female representatives in parliament  
+**Edu2.FM** : Edu2.F / Edu2.M  
+**Labo.FM** : Labo2.F / Labo2.M  
+
+##Data overview and summarization
+```{r}
+library(GGally)
+library(corrplot)
+library(dplyr)
+# visualize the 'human_' variables
+ggpairs(human)
+# compute the correlation matrix and visualize it with corrplot
+cor(human) %>% corrplot
+
+```
+
+In the plots above we can see the highest positive correlations between life expectancy, expected years of schooling and GNI, suggesting that better education induces longer lives and better economy in countries.  On the other hand are maternal mortality and adolescent birth rates correlating negatively with life expectancy and expected years of schooling, suggesting that low levels of national education could induce a high amount of adolescent mothers with a high perinatal mortality, inducing a lower life expectancy.  
+Variables "Edu2.FM", "Labo.FM", "Life.Exp", "Edu.Exp" and "Parli.F" are parametrical as their mean and median are close to each other. On the other hand, "GNI", "Mat.Mor" and "Ado.Birth" are non-parametric.
+
+##Non-standarized dataset and biplot
+
+```{r}
+# print out summaries of the standardized variables
+summary(human)
+# perform principal component analysis (with the SVD method)
+pca_human <- prcomp(human)
+
+library(dplyr)
+
+# create and print out a summary of pca_human
+s <- summary(pca_human)
+
+# rounded percetanges of variance captured by each PC
+pca_pr <- round(100*s$importance[2, ], digits = 1)
+
+# print out the percentages of variance
+pca_pr
+
+# create object pc_lab to be used as axis labels
+pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+
+# draw a biplot
+biplot(pca_human, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1] , ylab = pc_lab[2])
+
+```
+
+
+##Standarized dataset and biplot
+
+```{r}
+# standardize the variables
+human_std <- scale(human)
+# print out summaries of the standardized variables
+summary(human_std)
+# perform principal component analysis (with the SVD method)
+pca_human <- prcomp(human_std)
+
+library(dplyr)
+
+# create and print out a summary of pca_human
+s <- summary(pca_human)
+
+# rounded percetanges of variance captured by each PC
+pca_pr <- round(100*s$importance[2, ], digits = 1)
+
+# print out the percentages of variance
+pca_pr
+
+# create object pc_lab to be used as axis labels
+pc_lab <- paste0(names(pca_pr), " (", pca_pr, "%)")
+
+# draw a biplot
+biplot(pca_human, cex = c(0.8, 1), col = c("grey40", "deeppink2"), xlab = pc_lab[1] , ylab = pc_lab[2])
+
+```
+
+The PCA plot of the unscaled data indicates that their is only one variable that explains the variance completely. After scaling the variables are better plotted and comparable. 
+
+##Personal interpretation of principal components  
+
+Adolescent birth and maternal mortality are directly opposite to gross national income per capita, educational level and life expectancy between countries and the variables in this plain and they explain 53.16 % of the variation between the countries (PC1), suggesting that there is almost a clear division between these opposite variabeles in different countries. Or clearly stated: good economy, education and life expectancy in a country "keep"" adolescent pregnancy and maternal death rate low.  
+
+In the PC2-plain a high percentage of female representation in parlaiment and labour market explains another 16.2 % of the differences between the countries.  
+
+
+##The tea data set and Multiple Correspondence analysis  
+
+```{r}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(FactoMineR)
+# column names to keep in the dataset
+data(tea)
+keep_columns <- c("Tea", "How", "how", "sugar", "where", "lunch")
+
+# select the 'keep_columns' to create a new dataset
+tea_time <- select(tea, one_of(keep_columns))
+
+# look at the summaries and structure of the data
+summary(tea_time)
+str(tea_time)
+
+# visualize the dataset
+gather(tea_time) %>% ggplot(aes(value)) + facet_wrap("key", scales = "free") + geom_bar() + theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 8))
+
+# multiple correspondence analysis
+mca <- MCA(tea_time, graph = FALSE)
+
+# summary of the model
+summary(mca)
+
+# visualize MCA
+plot(mca, invisible=c("ind"), habillage = "quali")
+
+```
+
+  In the plot above we can observe both dimensions (Dim1 and Dim2), that explain respectively 15.2 and 14,2 % of the variance between the variables and cumulatively 29.5 %. On top of these there are 5 more dimensions, that explain the variance between the variables. 
+
+

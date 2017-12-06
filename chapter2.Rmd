@@ -2,7 +2,7 @@
 
 *This week datawrangling, regression and model validation have been central in this course.*
 
-###1. Read the data and explore dimensions and summaries
+##Read the data and explore dimensions and summaries
 
 ```{r}
 data_url <- "http://s3.amazonaws.com/assets.datacamp.com/production/course_2218/datasets/learning2014.txt"
@@ -24,7 +24,7 @@ The data consists of 166 students with the following 7 variables:
 7. **Points:** Maximal exam points.
 
 
-###2. Summary of the variables and grafical overview
+##Summary of the variables and grafical overview
 
 ```{r}
 summary(lrn14)
@@ -49,7 +49,7 @@ p
 
 The grafic above displays in more different ways the data than the bivariable scatterplot. The distribution of the results is normal, except for the parameters age and deep which are respectively right-skewed and left-skewed. Within the material is the relationship between the attitude toward statistics and final exam points the strongest with a positive correlation of 0,4 for both sexes. The second most strong correlation is seen between deep learning approach and surface learning approach. This correlation of 0,6 is negative and specific for the male group, for both groups the correlation is -0,3.
 
-###3. Regression model
+##Regression model
 
 ```{r}
 model_1 <-lm(points ~ attitude + stra + deep, data = lrn14)
@@ -71,7 +71,7 @@ summary(model_3)
 ```
 
 
-###4. Interpretation and explanation of model parameters
+##Interpretation and explanation of model parameters
 
 **Residuals:** The residuals show the difference between the values predicted by the model and the actual values. A good predictive value should have a symmetric distribution of the residuals.  
 **Coefficients:** The *intercept* is the expected mean value of Y when all X=0. The *attitude's* slope is estimated at 3.53, meaning that the maximum test points change with 3,5 points for every point of attitude change. *Standard Error* should fall within plus/minus 2 times the standard error of the regression from the regression line within a 95% prediction interval.The *Pr(>t)* acronym found in the model output relates to the probability of observing any value equal or larger than t. A small p-value indicates that it is unlikely we will observe a relationship between the predictor (attitude) and response (points) variables due to chance. Three asterisks represent a highly significant p-value.  
@@ -79,7 +79,7 @@ summary(model_3)
 **R-squared** statistic provides a measure of how well the model is fitting the actual data. A value of null means that the variable doesn't explain the variance in the dependent; 1 means the total opposite. In this case roughly 19 % of the variance found in the response variable (points) can be explained by the predictor variable (attitude).  
 **F-statistic** is a good indicator whether there is a relationship between the variable and the dependent value. The further away from 0 the better the reliability of the test and the possibilty to reject the H0 (Noll hypothesis: " There is no relationship between attitude and points.").
 
-###5. Diagnostic plots: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage
+##Diagnostic plots: Residuals vs Fitted values, Normal QQ-plot and Residuals vs Leverage
 
 ```{r}
 plot(model_3, which = c(1:2, 5))
